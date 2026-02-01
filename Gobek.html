@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>GÖBEK RADARI V2.0</title>
+    <style>
+        body {
+            background: radial-gradient(circle, #2c3e50, #000000);
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .scanner-box {
+            border: 2px solid #00ff00;
+            padding: 30px;
+            background: rgba(0, 255, 0, 0.05);
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 0 20px #00ff00;
+            width: 450px;
+            position: relative;
+        }
+        .scan-line {
+            width: 100%;
+            height: 2px;
+            background: #00ff00;
+            position: absolute;
+            left: 0;
+            top: 0;
+            box-shadow: 0 0 10px #00ff00;
+            display: none;
+            animation: move 2s linear infinite;
+        }
+        @keyframes move {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+        .emoji-area { font-size: 80px; margin-bottom: 10px; }
+        #result {
+            margin: 20px 0;
+            font-size: 1.2rem;
+            min-height: 80px;
+            color: #ff3e3e;
+            text-shadow: 1px 1px #000;
+        }
+        button {
+            background: #00ff00;
+            color: black;
+            border: none;
+            padding: 15px 30px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            text-transform: uppercase;
+        }
+        .shake { animation: shake 0.5s; }
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            100% { transform: translate(-1px, -2px) rotate(-1deg); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="scanner-box" id="box">
+    <div class="scan-line" id="line"></div>
+    <div class="emoji-area">🍗</div>
+    <h2>GÖBEK RADARI V2.0</h2>
+    <p>Sistem Durumu: <span style="color:#00ff00">Kütle Tespit Edildi</span></p>
+    
+    <div id="result">Analiz için butona bas (Cesaretin varsa...)</div>
+    
+    <button onclick="derinAnaliz()">ANALİZİ BAŞLAT</button>
+</div>
+
+<script>
+    const inciler = [
+        "❌ HATA: Kütle o kadar büyük ki Google Maps burayı ada sanıyor!",
+        "🚨 UYARI: Bu göbek değil, kendi yerçekimi olan küçük bir gezegen.",
+        "🍕 ANALİZ: Son 48 saatte bir koyun sürüsü eksilmiş görünüyor.",
+        "🏗️ DURUM: İnşaat mühendislerini çağırdık, bu göbeği ancak kolon tutar.",
+        "🧥 SONUÇ: Tişörtün 'Beni sal artık' diye bağırdığını duyabiliyorum.",
+        "📡 RADAR: Göbekten dolayı sinyal çekmiyor, lütfen açık alana çıkın.",
+        "🍳 TESPİT: Üzerinde yumurta kırsak 2 dakikada pişer, o kadar geniş bir saha.",
+        "🛑 KRİTİK: Eğilirken 'Lütfen Geri Gidiniz' sesi çıkarıyor musun?"
+    ];
+
+    function derinAnaliz() {
+        const result = document.getElementById('result');
+        const line = document.getElementById('line');
+        const box = document.getElementById('box');
+        
+        line.style.display = "block";
+        result.innerText = "Kütle hacmi hesaplanıyor... (Bu biraz sürebilir)";
+        box.classList.add('shake');
+
+        setTimeout(() => {
+            const random = inciler[Math.floor(Math.random() * inciler.length)];
+            result.innerText = random;
+            line.style.display = "none";
+            box.classList.remove('shake');
+            
+            // Ekranı salla (Deprem etkisi!)
+            document.body.style.backgroundColor = "red";
+            setTimeout(() => { document.body.style.backgroundColor = ""; }, 100);
+        }, 2000);
+    }
+</script>
+
+</body>
+</html>
